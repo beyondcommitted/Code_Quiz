@@ -1,0 +1,43 @@
+code quiz
+
+
+
+Logic
+click the start button
+    timer starts
+    I am presented with a question
+
+answer a question
+    presented with another question
+
+if question incorrect
+    time subtracted
+
+if no more question or the timer reaches 0
+    game over
+        ask for users initials
+        save initial score
+
+
+HTML area
+
+Start Page
+    start button
+    Title with explanation
+
+Main Page
+    timer area
+    question area [i+1]
+    answer area - 4 answer buttons
+        a) display answer choice [i+1]
+        b) display answer choice [i+1]
+        c) display answer choice [i+1]
+        d) display answer choice [i+1]
+    after last question
+        display quiz over
+        calculate  user score
+        store user initials and user score to local storage together
+    Link to view HighScores 
+
+High Scores Page
+    display intials and scores stored in local storage
