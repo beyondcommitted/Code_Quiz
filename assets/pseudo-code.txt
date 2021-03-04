@@ -41,3 +41,7 @@ Main Page
 
 High Scores Page
     display intials and scores stored in local storage
+
+
+Assignments that  will help with this quiz
+    Using letter-buttons for to choose the right answer

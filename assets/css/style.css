@@ -1,0 +1,30 @@
+* {font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    margin-right: 350px;
+    margin-left: 350px;
+    border-style: double;
+    border-radius: 50px;
+    border-width: 10px;
+    background-color: lightgreen;
+}
+
+.question {
+    height: 350px;
+    border-style: double;
+    border-width: 10px;
+    margin-right: 390px;
+    margin-left: 390px;
+    padding-top: 20px;
+    background-color: lightblue;
+}
+
+.center { text-align: center;
+    }
+
+button {
+    font-size: 32px;
+    height: 100px;
+    width: 150px
+}
