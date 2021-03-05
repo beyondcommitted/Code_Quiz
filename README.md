@@ -24,4 +24,4 @@ WHEN the game is over
 THEN I can save my initials and my score
 ```
 ## Mock up
-![Code_Quiz Demo](Code_Quiz\assets\images\screenshot.png)
+![Code_Quiz Demo](https://raw.githubusercontent.com/beyondcommitted/Code_Quiz/main/assets/images/screenshot.png)
