@@ -7,9 +7,7 @@ var questions = document.querySelector("#questions");
 var container = document.querySelector("#container");
 
 // 20 seconds per question:
-var timeLeft = 101;
-// Holds interval time
-var holdInterval = 0;
+var timeLeft = 100;
 // Holds and applies penalty when assigned
 var penalizeTime = 15;
 // Creates an element of an ordered list
@@ -51,19 +49,17 @@ var allQuestions = [
 
 // Starts the clock on button click and shows the user a countdown on the screen
 clock.addEventListener("click", function () {
-  // This checking 0 because the clock is originally set at 0 then it subtracts the interval of 1
-  if (holdInterval === 0) {
-    holdInterval = setInterval(function () {
-      timeLeft--;
-      setTime.textContent = "Time: " + timeLeft;
-      // If and when clock hits 0 this will end the quiz
-      if (timeLeft <= 0) {
-        clearInterval(holdInterval);
-        endQuiz();
-        setTime.textContent = "Aww your time is up!";
-      }
-    }, 1000);
-  }
+  // Subtracts 1 second from the clock for the countdown
+  setInterval(function () {
+    timeLeft--;
+    setTime.textContent = "Time: " + timeLeft;
+    // If and when clock hits 0 this will end the quiz
+    if (timeLeft <= 0) {
+      endQuiz();
+      setTime.textContent = "Aww your time is up!";
+    }
+  }, 1000);
+  //}
   renderQuestion(questionNumber);
 });
 
@@ -96,7 +92,7 @@ function compare(e) {
     var createDiv = document.createElement("div");
     createDiv.setAttribute("id", "createDiv");
     // Right answer
-    if (e.textContent == allQuestions[questionNumber].correctAnswer) {
+    if (e.textContent === allQuestions[questionNumber].correctAnswer) {
       userScore++;
       createDiv.textContent =
         "That is Correct! Your answer is:  " +
@@ -129,10 +125,78 @@ function compare(e) {
   }
   questions.appendChild(createDiv);
 }
-// All done will append last page
+// endQuiz will append last page
 function endQuiz() {
   questions.innerHTML = "";
   setTime.innerHTML = "";
 
-  
+  // Title for the end of the quiz
+  // uses a h1 tag for the text
+  var createPageTitle = document.createElement("h1");
+  createPageTitle.setAttribute("id", "createPageTitle");
+
+  // places the text on the page
+  createPageTitle.textContent = "End of Quiz!";
+  questions.appendChild(createPageTitle);
+  var createP = document.createElement("p");
+  createP.setAttribute("id", "createP");
+
+  questions.appendChild(createP);
+
+  // Calculates time remaining and replaces it with score
+  if (timeLeft >= 0) {
+    var timeRemaining = timeLeft;
+    var createP2 = document.createElement("p");
+    clearInterval();
+    createP.textContent = "You received a  final score of: " + timeRemaining;
+
+    questions.appendChild(createP2);
   }
+
+  // Label to inform user what to do with the input form
+  var createTag = document.createElement("label");
+  createTag.setAttribute("id", "createTag");
+  createTag.textContent = "Input your initials here: ";
+
+  questions.appendChild(createTag);
+
+  // Input form for submission of intials
+  var createForm = document.createElement("input");
+  createForm.setAttribute("type", "text");
+  createForm.setAttribute("id", "initials");
+  createForm.textContent = "";
+
+  questions.appendChild(createForm);
+
+  // Renders a submit button
+  var createSubmit = document.createElement("button");
+  createSubmit.setAttribute("type", "Submit");
+  createSubmit.setAttribute("id", "Submit");
+  createSubmit.textContent = "Submit";
+
+  questions.appendChild(createSubmit);
+
+  // Event listener to that listens for click that sends initials to local storage for initials and score
+  createSubmit.addEventListener("click", function () {
+    var initials = createForm.value;
+
+    if (initials === null) {
+    } else {
+      var storeUserScore = {
+        initials: initials,
+        userScore: timeRemaining,
+      };
+      var quizScores = localStorage.getItem("quizScores");
+      if (quizScores === null) {
+        quizScores = [];
+      } else {
+        quizScores = JSON.parse(quizScores);
+      }
+      quizScores.push(storeUserScore);
+      var newUser = JSON.stringify(quizScores);
+      localStorage.setItem("quizScores", newUser);
+      // Redirects user to  highscore page
+      window.location.replace("assets/scores/scores.html");
+    }
+  });
+}
