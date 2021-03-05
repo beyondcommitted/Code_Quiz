@@ -12,7 +12,7 @@ var timeLeft = 100;
 var penalizeTime = 15;
 // Creates an element of an ordered list
 var createOl = document.createElement("ol");
-// Decalring an array with objects as questions and  possible answers stored in arrays.
+// Declaring an array with objects as questions and  possible answers stored in arrays.
 var allQuestions = [
   {
     question:
@@ -162,7 +162,6 @@ function endQuiz() {
 
   // Input form for submission of intials
   var createForm = document.createElement("input");
-  createForm.setAttribute("type", "text");
   createForm.setAttribute("id", "initials");
   createForm.textContent = "";
 
@@ -170,7 +169,6 @@ function endQuiz() {
 
   // Renders a submit button
   var createSubmit = document.createElement("button");
-  createSubmit.setAttribute("type", "Submit");
   createSubmit.setAttribute("id", "Submit");
   createSubmit.textContent = "Submit";
 

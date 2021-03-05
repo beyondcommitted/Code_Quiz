@@ -7,16 +7,13 @@ clear.addEventListener("click", function () {
     localStorage.clear();
     location.reload();
 });
-// Grabs the initials and scores in the local storage 
-var quizScores = localStorage.getItem("quizScores");
-quizScores = JSON.parse(quizScores);
-if (quizScores !== null) {
+// // Grabs the initials and scores from the local storage 
+// // var quizScores = localStorage.getItem("quizScores");
+// // quizScores = JSON.parse(quizScores);
+// // if (quizScores !== null) {
+    //var createListItem = document.createElement("li");
+// // createListItem.textContent = quizScores[i].initials + 
+    //" " + quizScores[i].score; score.append(createListItem);
 
-    for (var i = 0; i < quizScores.length; i++) {
-
-        var createListItem = document.createElement("li");
-        createListItem.textContent = quizScores[i].initials + " " + quizScores[i].score;
-        score.append(createListItem);
-
-    }
-}
+//     }
+// }

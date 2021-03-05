@@ -12,10 +12,12 @@ h1 {
 
 .questions {
     height: 350px;
+    width: 550px;
     border-style: double;
     border-width: 10px;
-    margin-right: 390px;
-    margin-left: 390px;
+    border-radius: 30px;
+    /* margin-right: 390px;
+    margin-left: 390px; */
     padding-top: 20px;
     background-color: lightblue;
 }
@@ -35,4 +37,22 @@ li {
 
 li:hover {
     background-color: yellow;
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        background-color: rgb(94, 94, 104);
+    } 
+
+}
+
+@media screen and (max-width: 700px) {
+
+    
+
+    body {
+        background-color: rgb(0, 0, 0);
+    
+    } 
+
 }
