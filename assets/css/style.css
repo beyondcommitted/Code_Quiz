@@ -1,7 +1,7 @@
 * {font-family: 'Times New Roman', Times, serif; 
  }
 
-header {
+h1 {
     margin-right: 350px;
     margin-left: 350px;
     border-style: double;
@@ -10,7 +10,7 @@ header {
     background-color: lightgreen;
 }
 
-.question {
+.questions {
     height: 350px;
     border-style: double;
     border-width: 10px;
@@ -27,7 +27,4 @@ button {
     font-size: 24px;
     height: 60px;
     width: 100px
-}
-.timer {
-    float: right
 }

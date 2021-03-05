@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Linking the styling that was done in CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- Linking the interactivity that was done in JavaScript -->
-    
-    <!-- Title that shows up oin the tab for viewers to see -->
-    <title>Pop Quiz</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Code Quiz</title>
 </head>
+
 <body>
-    <header>
-        <h1 class="center">By Popular Demand</h1>
-        <h3 class="center">Start this quiz and see what you know!</h3>
-    </header>
-    <div class="center question">
-        <button class="btn" id="start">START</button>
-        <div class="timer" id="timer">Countdown</div>
-        <div id="question"></div>
-    </div>
-<script src="assets/js/script.js"></script>
-</body>
-</html>
+    <!-- Link to highscores -->
+    <a href="HighScores.html">View Highscores</a>
+    <section id="container">
+        <!-- Countdown -->
+        <div class="setTIme" id="setTime"></div>
+        <!-- Contents of quiz -->
+        <div class="questions" id="questions">
+            <h1>Pop Code Quiz</h1>
+            <p>You will start with 100 seconds to answer these questions about coding. If you get a question wrong, you will lose time from the remaining seconds on the clock. Do your best and think quicky!</p>
+            <ol id="answers"></ol>
+            <!-- Buttons -->
+            <button class="button" id="start">Start Quiz</button>
+        </div>
+
+    </section>

@@ -1,95 +1,138 @@
-var timeEl = document.querySelector("#timer");
-var startButton = document.querySelector("#start");
-var questionEl = document.querySelector("#question");
-var questionNumber = 0;
-var correctAnswer;
+// Declarations
 var userScore = 0;
-// Array of objects and arrays to store the questions, answers and correct answer to be called upon
+var questionNumber = 0;
+var setTime = document.querySelector("#setTime");
+var clock = document.querySelector("#start");
+var questions = document.querySelector("#questions");
+var container = document.querySelector("#container");
+
+// 20 seconds per question:
+var timeLeft = 101;
+// Holds interval time
+var holdInterval = 0;
+// Holds and applies penalty when assigned
+var penalizeTime = 15;
+// Creates an element of an ordered list
+var createOl = document.createElement("ol");
+// Decalring an array with objects as questions and  possible answers stored in arrays.
 var allQuestions = [
   {
     question:
       "Which language is considered as the muscle out of these 3 languages?",
-    answers: ["(a) HTML", "(b) JavaScript", "(c) CSS"],
-    correctAnswer: "(b) Javascript",
+    possibleAnswer: ["HTML", "JavaScript", "CSS"],
+    correctAnswer: "JavaScript",
   },
   {
     question: "What is CSS and abbreviation for?",
-    answers: [
-      "(a) Computer Science Style",
-      "(b) Cascade Sheet Styles",
-      "(c)  Cascading Style Sheets",
+    possibleAnswer: [
+      "Computer Science Style",
+      "Cascade Sheet Styles",
+      "Cascading Style Sheets",
     ],
-    correctAnswer: "(c) Cascading Style Sheets",
+    correctAnswer: "Cascading Style Sheets",
   },
   {
     question: "What is a class considered as in HTML?",
-    answers: ["(a) an attribute", "(b) a method", "(c) a function"],
-    correctAnswer: "(a) an attribute",
+    possibleAnswer: ["an attribute", "a method", "a function"],
+    correctAnswer: "an attribute",
   },
   {
     question:
       "Which symbols out of these are used to assign items to an array?",
-    answers: ["(a) []", "(b) {}", "(c) <>"],
-    correctAnswer: "(a) []",
+    possibleAnswer: ["brackets", "parenthesis", "curly brackets", "quotes"],
+    correctAnswer: "brackets",
   },
   {
     question: "Which declaration can not be reassigned later in your code?",
-    answers: ["(a) var", "(b) const", "(c) let"],
-    correctAnswer: "(b) const",
+    possibleAnswer: ["var", "let", "const"],
+    correctAnswer: "const",
   },
 ];
-// Starts 2 minute timer when the start button is pressed
-var timeLeft = 120;
 
-function startTime() {
-  var timer = setInterval(function () {
-    // Subtracting time by 1
-    timeLeft--;
-    // Displaying the countdown on the page
-    timeEl.textContent = timeLeft;
+// Starts the clock on button click and shows the user a countdown on the screen
+clock.addEventListener("click", function () {
+  // This checking 0 because the clock is originally set at 0 then it subtracts the interval of 1
+  if (holdInterval === 0) {
+    holdInterval = setInterval(function () {
+      timeLeft--;
+      setTime.textContent = "Time: " + timeLeft;
+      // If and when clock hits 0 this will end the quiz
+      if (timeLeft <= 0) {
+        clearInterval(holdInterval);
+        endQuiz();
+        setTime.textContent = "Aww your time is up!";
+      }
+    }, 1000);
+  }
+  renderQuestion(questionNumber);
+});
 
-    if (timeLeft === 0) {
-      clearInterval(timer);
-    }
-  }, 1000);
-  return timeLeft;
+// Renders questions and choices to page
+function renderQuestion(questionNumber) {
+  questions.innerHTML = "";
+  createOl.innerHTML = "";
+  // references object and items in array to render questions in order
+  for (var i = 0; i < allQuestions.length; i++) {
+    // Appends question to page
+    var userQuestion = allQuestions[questionNumber].question;
+    var userResponse = allQuestions[questionNumber].possibleAnswer;
+    questions.textContent = userQuestion;
+  }
+  // For each new question and choices
+  userResponse.forEach(function (newItem) {
+    var listItem = document.createElement("li");
+    listItem.textContent = newItem;
+    questions.appendChild(createOl);
+    createOl.appendChild(listItem);
+    // Listens for the correct response on the button click
+    listItem.addEventListener("click", compare);
+  });
 }
-startButton.addEventListener("click", startQuiz);
+// Event to compare choices with answer
+function compare(e) {
+  var e = e.target;
 
-// Displays first question when the start button is pressed.
-function displayQuestion() {
-  // To hide the startButton after the click
-  startButton.style.visibility = "hidden";
-
-  // Displays a question
-  questionEl.textContent = allQuestions[questionNumber[0]];
-
-  // Displays the buttons for each answewr choice
-  var answerChoices = document.createElement("button");
-  for (var i = 0; i < allQuestions.length; index++) {
-    var answerChoices = document.createElement("button");
-    if (answerChoices === allQuestions[i].answers) {
+  if (e.matches("li")) {
+    var createDiv = document.createElement("div");
+    createDiv.setAttribute("id", "createDiv");
+    // Right answer
+    if (e.textContent == allQuestions[questionNumber].correctAnswer) {
       userScore++;
-      alert("That is Correct!");
+      createDiv.textContent =
+        "That is Correct! Your answer is:  " +
+        allQuestions[questionNumber].correctAnswer;
+      // Wrong or undefined condition
     } else {
-      alert("Wrong this time! You will get the next one!");
+      // Subtracts 15 seconds from the time left on the clock
+      timeLeft = timeLeft - penalizeTime;
+      createDiv.textContent =
+        "Unfortunately your answer is wrong! The correct answer is:  " +
+        allQuestions[questionNumber].correctAnswer;
     }
-    alert("you got" + userScore + "/" + allQuestions.length);
   }
-    function renderNewQuestion(allQuestions) {
-      renderNewQuestion = allQuestions[questionNumber++].forEach(allQuestions);
-    }
-    if (answerChoices.length === correctAnswer) {
-      allQuestions++;
-    } else {
-      timeLeft -= 10;
-    }
-    // Displays text on the answer buttons
-    answerButton.textContent = answerChoices[index];
-    questionEl.append(answerButton);
-  }
+  // Question Number determines which question user is on
+  questionNumber++;
 
-function startQuiz() {
-  startTime();
-  displayQuestion();
+  if (questionNumber >= allQuestions.length) {
+    // endQuiz will append last page with user stats
+    endQuiz();
+    createDiv.textContent =
+      "You have reached the end of the Quiz!" +
+      " " +
+      "You answered  " +
+      userScore +
+      "/" +
+      allQuestions.length +
+      " of the questions correctly!";
+  } else {
+    renderQuestion(questionNumber);
+  }
+  questions.appendChild(createDiv);
 }
+// All done will append last page
+function endQuiz() {
+  questions.innerHTML = "";
+  setTime.innerHTML = "";
+
+  
+  }
