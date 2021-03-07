@@ -47,19 +47,20 @@ var allQuestions = [
   },
 ];
 
-// Starts the clock on button click and shows the user a countdown on the screen
+// Starts the clock on button click and shows the user a countdown on the screen other wise would render first question without start button
 clock.addEventListener("click", function () {
   // Subtracts 1 second from the clock for the countdown
   setInterval(function () {
     timeLeft--;
-    setTime.textContent = "Time: " + timeLeft;
+    // Pushes countdown and time to display on the page
+    setTime.textContent = "Countdown: " + timeLeft;
     // If and when clock hits 0 this will end the quiz
     if (timeLeft <= 0) {
       endQuiz();
+      // If and when the clock reaches 0 this will display on the screen.
       setTime.textContent = "Aww your time is up!";
     }
   }, 1000);
-  //}
   renderQuestion(questionNumber);
 });
 
@@ -69,20 +70,21 @@ function renderQuestion(questionNumber) {
   createOl.innerHTML = "";
   // references object and items in array to render questions in order
   for (var i = 0; i < allQuestions.length; i++) {
-    // Appends question to page
+    // Appends question to page without you only get answers
     var userQuestion = allQuestions[questionNumber].question;
     var userResponse = allQuestions[questionNumber].possibleAnswer;
     questions.textContent = userQuestion;
   }
-  // For each new question and choices
+  // For each new question and appends element to the page so the possible answer can be chosen
   userResponse.forEach(function (newItem) {
     var listItem = document.createElement("li");
     listItem.textContent = newItem;
     questions.appendChild(createOl);
     createOl.appendChild(listItem);
-    // Listens for the correct response on the button click
+    // Listens for the correct response on the button click without user can not chose and get to the next question
     listItem.addEventListener("click", compare);
   });
+return questionNumber;
 }
 // Event to compare choices with answer
 function compare(e) {
