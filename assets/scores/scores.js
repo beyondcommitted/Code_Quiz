@@ -10,7 +10,6 @@ clear.addEventListener("click", function () {
 // Grabs the initials and scores from the local storage
 var quizScores = localStorage.getItem("quizScores");
 quizScores = JSON.parse(quizScores);
-console.log(quizScores);
 if (quizScores !== null) {
   for (let i = 0; i < quizScores.length; i++) {
     var createListItem = document.createElement("li");
@@ -18,9 +17,9 @@ if (quizScores !== null) {
       quizScores[i].initials + " " + quizScores[i].userScore;
     score.append(createListItem);
   }
-};
+}
 
-document.getElementById('returnBack').addEventListener('click', (event) => {
-    event.preventDefault();
-    window.location.replace("../../index.html");
-  });
+document.getElementById("returnBack").addEventListener("click", (event) => {
+  event.preventDefault();
+  window.location.replace("../../index.html");
+});
