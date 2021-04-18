@@ -6,8 +6,8 @@ who want to test their basic knowlede about coding.
 The creation of this quiz is built with HTML, CSS and JavaScript
 ```
 Here are the link to access the finished work and github:<br>
-https://github.com/beyondcommitted/Code_Quiz<br>
-https://beyondcommitted.github.io/Code_Quiz/index.html
+## [GitHub](https://github.com/beyondcommitted/Code_Quiz)<br>
+## [Deployment](https://beyondcommitted.github.io/Code_Quiz/index.html)
 
 ## Acceptance Critera
 ```
